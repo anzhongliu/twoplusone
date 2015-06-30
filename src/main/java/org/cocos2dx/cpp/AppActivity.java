@@ -26,7 +26,11 @@ THE SOFTWARE.
 ****************************************************************************/
 package org.cocos2dx.cpp;
 
+import com.vincent.android.LoginModuleApi;
+import com.vincent.android.controller.ManageController;
 import org.cocos2dx.lib.Cocos2dxActivity;
 
 public class AppActivity extends Cocos2dxActivity {
+//    ManageController manageController = new ManageController();
+    LoginModuleApi loginModuleApi = LoginModuleApi.getInstance();
 }
