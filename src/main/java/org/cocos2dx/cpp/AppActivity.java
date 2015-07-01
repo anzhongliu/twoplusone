@@ -26,11 +26,20 @@ THE SOFTWARE.
 ****************************************************************************/
 package org.cocos2dx.cpp;
 
+import android.app.Activity;
+import android.os.Bundle;
 import com.vincent.android.LoginModuleApi;
-import com.vincent.android.controller.ManageController;
 import org.cocos2dx.lib.Cocos2dxActivity;
 
 public class AppActivity extends Cocos2dxActivity {
-//    ManageController manageController = new ManageController();
-    LoginModuleApi loginModuleApi = LoginModuleApi.getInstance();
+    private static int flag = 1;
+    public void onCreate(Bundle saveIntanceState) {
+        super.onCreate(saveIntanceState);
+    }
+
+    public void login() {
+        LoginModuleApi loginModuleApi = LoginModuleApi.getInstance();
+        loginModuleApi.setLoginClass(AppActivity.class);
+        loginModuleApi.login(this);
+    }
 }
