@@ -51,6 +51,11 @@ public class AppActivity extends Cocos2dxActivity {
         loginModuleApi.login(_this);
     }
 
+//    public static void regist() {
+//        LoginModuleApi loginModuleApi = LoginModuleApi.getInstance();
+//        loginModuleApi.regist(_this);
+//    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (RESULT_OK != resultCode){
@@ -60,7 +65,7 @@ public class AppActivity extends Cocos2dxActivity {
 
         int flag = data.getIntExtra("flag", LoginModuleApi.FLAG_ERROR);
         if (flag == LoginModuleApi.FLAG_ERROR) {
-            Toast.makeText(this, "内部错误", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "注册错误", Toast.LENGTH_LONG).show();
             return ;
         }
 
