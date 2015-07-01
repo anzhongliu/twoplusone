@@ -72,7 +72,6 @@ bool StartScene::init()
 	pStartItem->addChild(startItemLabel);
 	startItemLabel->setPosition(pStartItem->getContentSize() / 2);
     pMenuItems.pushBack(pStartItem);
-	
 
 	auto pCloseButton = Scale9Sprite::create(Resource::button_exit, Rect(0, 0, 150, 150), Rect(5, 5, 140, 140));
 	pCloseButton->setContentSize(Size(visibleSize.width * Config::buttonWidthScale, visibleSize.height * Config::buttonHeightScale));
@@ -88,6 +87,24 @@ bool StartScene::init()
 	closeItemLabel->setColor(Config::menuLabelColor);
 	closeItemLabel->setPosition(pCloseItem->getContentSize() / 2);
     pMenuItems.pushBack(pCloseItem);
+
+    // 用于测试登陆按钮
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+    auto pLoginButton = Scale9Sprite::create(Resource::button_exit, Rect(0, 0, 150, 150), Rect(5, 5, 140, 140));
+    	pLoginButton->setContentSize(Size(visibleSize.width * Config::buttonWidthScale, visibleSize.height * Config::buttonHeightScale));
+    	auto pLoginButtonClicked = Scale9Sprite::create(Resource::button_exit_clicked, Rect(0, 0, 150, 150), Rect(5, 5, 140, 140));
+    	pLoginButtonClicked->setContentSize(Size(visibleSize.width * Config::buttonWidthScale, visibleSize.height * Config::buttonHeightScale));
+    	auto pLoginItem = MenuItemSprite::create(pLoginButton,
+    		pLoginButtonClicked,
+    		NULL,
+            this,
+            menu_selector(StartScene::menuLoginCallback));
+        auto loginItemLabel = Label::createWithTTF("LOGIN", Config::fontStyle, visibleSize.height * Config::menuFontSizeScale);
+    	pLoginItem->addChild(loginItemLabel);
+    	loginItemLabel->setColor(Config::menuLabelColor);
+    	loginItemLabel->setPosition(pLoginItem->getContentSize() / 2);
+        pMenuItems.pushBack(pLoginItem);
+ #endif
 
 #if (TEST_OVER_SCENE == 1) 
     auto pOverSceneButton = Scale9Sprite::create(Resource::button_exit, Rect(0, 0, 150, 150), Rect(5, 5, 140, 140));
@@ -179,4 +196,19 @@ void StartScene::onEnter() {
     keyListener->onKeyReleased = CC_CALLBACK_2(StartScene::onKeyPressed, this);
     _eventDispatcher->addEventListenerWithSceneGraphPriority(keyListener, this);
     keyListener->setEnabled(true);
+}
+
+void StartScene::menuLoginCallback(Ref * pSender){
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID) //判断当前是否为Android平台
+    JniMethodInfo minfo;
+
+    bool isHave = JniHelper::getStaticMethodInfo(minfo,"org/cocos2dx/cpp/AppActivity","login", "()V");
+
+    if (!isHave) {
+        log("jni:login is null");
+    }else{
+        //调用此函数
+        minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID);
+    }
+#endif
 }

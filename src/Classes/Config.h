@@ -7,51 +7,51 @@ using namespace std;
 USING_NS_CC;
 
 namespace Config {
-	const static Color4B BackGroundLayerColor(255, 255, 224, 255); //±³¾°ÑÕÉ«
-	const static Color3B CardBgLayerColor(203, 191, 179); // ÓÎÏ·¾²Ö¹¿¨Æ¬ÑÕÉ«
-	const static Color4B GameBGLayerColor(185, 171, 158, 255); // ÓÎÏ·³¡¾°ÑÕÉ«
-	const static Color3B GameBGCardColor1(238, 228, 218); // 1Ê±¿¨Æ¬ÑÕÉ«
-	const static Color3B GameBGCardColor2(229, 205, 171); // 2Ê±¿¨Æ¬ÑÕÉ«
-	const static Color3B GameBGCardColor3(244, 123, 94); // ´óÓÚµÈÓÚ3Ê±¿¨Æ¬ÑÕÉ«
-	const static Color3B numColor1(119, 110, 101); //×ÖÊıĞ¡ÓÚ3µÄÑÕÉ«
-	const static Color3B numColor2(255, 255, 255);//×ÖÊı´óÓÚµÈÓÚ3µÄÑÕÉ«
+	const static Color4B BackGroundLayerColor(255, 255, 224, 255); //èƒŒæ™¯é¢œè‰²
+	const static Color3B CardBgLayerColor(203, 191, 179); // æ¸¸æˆé™æ­¢å¡ç‰‡é¢œè‰²
+	const static Color4B GameBGLayerColor(185, 171, 158, 255); // æ¸¸æˆåœºæ™¯é¢œè‰²
+	const static Color3B GameBGCardColor1(238, 228, 218); // 1æ—¶å¡ç‰‡é¢œè‰²
+	const static Color3B GameBGCardColor2(229, 205, 171); // 2æ—¶å¡ç‰‡é¢œè‰²
+	const static Color3B GameBGCardColor3(244, 123, 94); // å¤§äºç­‰äº3æ—¶å¡ç‰‡é¢œè‰²
+	const static Color3B numColor1(119, 110, 101); //å­—æ•°å°äº3çš„é¢œè‰²
+	const static Color3B numColor2(255, 255, 255);//å­—æ•°å¤§äºç­‰äº3çš„é¢œè‰²
 
 	const static Color3B menuLabelColor(255, 255, 255);
 
-	const static Color3B scoreLabelColor(0, 0, 0); // ·ÖÊıÏÔÊ¾ÑÕÉ«
+	const static Color3B scoreLabelColor(0, 0, 0); // åˆ†æ•°æ˜¾ç¤ºé¢œè‰²
 
     const static Color3B voiceLayerLabelColor(0, 0, 0);
 
-    const static float GameLayerCardSpacingScale = 0.03; // ¿¨Æ¬¼ä¾à
+    const static float GameLayerCardSpacingScale = 0.03; // å¡ç‰‡é—´è·
 
-	const static int right = 1;	//·½ÏòÎªÓÒ
-	const static int left = 2;	//·½ÏòÎª×ó
-	const static int up = 3;	//·½ÏòÎªÉÏ
-	const static int down = 4;//·½ÏòÎªÏÂ
+	const static int right = 1;	//æ–¹å‘ä¸ºå³
+	const static int left = 2;	//æ–¹å‘ä¸ºå·¦
+	const static int up = 3;	//æ–¹å‘ä¸ºä¸Š
+	const static int down = 4;//æ–¹å‘ä¸ºä¸‹
 
-	//const static int cardFontSize = 35; // ¿¨Æ¬×ÖÌå´óĞ¡
+	//const static int cardFontSize = 35; // å¡ç‰‡å­—ä½“å¤§å°
 	//const static int cardFontSize_MoreThan100 = 25;
 	
-	//×ÖÌåÏà¹Ø
+	//å­—ä½“ç›¸å…³
 	const static float cardFontSizeScale = 0.07292;
 	const static float cardFontSizeScale_MoreThan100 = 0.052083;
 	const static float scoreFontSizeScale = 0.1041666;
 
 	const static string fontStyle = "fonts/arial.ttf";
 
-    // °´Å¥Ïà¹Ø
+    // æŒ‰é’®ç›¸å…³
 	const static float buttonWidthScale = 0.6;
 	const static float buttonHeightScale = 0.083333;
     const static float menuPaddingScale = 0.0625;
     const static float menuFontSizeScale = 0.0416666;
 
-    // ²Ëµ¥Ïà¹Ø
+    // èœå•ç›¸å…³
 	const static float menuButtonWidthScale = 0.24;
 	const static float menuButtonHeightScale = 0.08333;
 	const static float menuButtonTopScale = 0.0816;
 	const static float menuButtonTopRightScale = 0.111111;
     
-    // ³¡¾°Ïà¹Ø
+    // åœºæ™¯ç›¸å…³
     const static float gameLayerSizeWidthScale = 0.9;
     const static float gameLayerSizeHeightScale = 0.666666;
     const static float cardSizeScale = 0.2;
@@ -61,9 +61,9 @@ namespace Config {
     class SoundConfig{
     public:
 
-        // ÅäÖÃÉùÒôĞ§¹û
-        static bool isMusic; // ±³¾°ÒôÀÖ
-        static bool isVoice; // ÒôĞ§
+        // é…ç½®å£°éŸ³æ•ˆæœ
+        static bool isMusic; // èƒŒæ™¯éŸ³ä¹
+        static bool isVoice; // éŸ³æ•ˆ
     };
     
 }

@@ -24,7 +24,7 @@ bool OverScene::init() {
 
     auto visibleSize = Director::getInstance()->getVisibleSize();
 
-    //  ÉèÖÃ±³¾°³¡¾°
+    //  è®¾ç½®èƒŒæ™¯åœºæ™¯
 	auto bgLayer = Scale9Sprite::create(Resource::menu_bg, Rect(0, 0, 320, 480), Rect(0, 0, 320, 480));
 	bgLayer->setContentSize(visibleSize);
 	bgLayer->setAnchorPoint(Vec2(0, 0));

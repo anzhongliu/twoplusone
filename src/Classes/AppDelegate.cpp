@@ -52,10 +52,10 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     register_all_packages();
 
-	//Ô¤¼ÓÔØÉùÒô
+	//é¢„åŠ è½½å£°éŸ³
 	SimpleAudioEngine::getInstance()->preloadBackgroundMusic(Resource::music_bg.c_str());
 	SimpleAudioEngine::getInstance()->preloadBackgroundMusic(Resource::music_bg_2.c_str());
-	//Ô¤¼ÓÔØÒôÐ§
+	//é¢„åŠ è½½éŸ³æ•ˆ
 	SimpleAudioEngine::getInstance()->preloadEffect(Resource::effect_button.c_str());
 	SimpleAudioEngine::getInstance()->preloadEffect(Resource::effect_move.c_str());
 	SimpleAudioEngine::getInstance()->preloadEffect(Resource::effect_move_back.c_str());

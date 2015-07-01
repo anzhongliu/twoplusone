@@ -23,7 +23,7 @@ bool MainScene::init() {
 
     this->cardMoveOffset = visibleSize.height * Config::cardMoveOffsetScale;
 
-    // ³õÊ¼»¯ÓÎÏ·²ã
+    // åˆå§‹åŒ–æ¸¸æˆå±‚
     initGameScene(visibleSize, origin);
 
     for (int i = 0; i < 4; i++) {
@@ -34,15 +34,15 @@ bool MainScene::init() {
 
 	initPreviewCard(visibleSize);
 
-	//ÉèÖÃÖÖ×Ó
+	//è®¾ç½®ç§å­
 	srand(time(NULL));
 
-    // ³õÊ¼»¯¿¨Æ¬
+    // åˆå§‹åŒ–å¡ç‰‡
     initCard(visibleSize, origin);
 
     this->isScrollable = true;
 
-    // ÉèÖÃ´¥Ãş¼àÌıÊÂ¼ş
+    // è®¾ç½®è§¦æ‘¸ç›‘å¬äº‹ä»¶
     auto touchListener = EventListenerTouchOneByOne::create();
     touchListener->onTouchBegan = CC_CALLBACK_2(MainScene::onTouchBegan, this);
     touchListener->onTouchMoved = CC_CALLBACK_2(MainScene::onTouchMoved, this);
@@ -107,7 +107,7 @@ void MainScene::initGameScene(const Size & visibleSize, const Vec2 & origin) {
     float widthSpace = (gameLayerSize.x - gameLayerSize.x * 4 * Config::cardSizeScale - gameLayerSize.x * Config::GameLayerCardSpacingScale * 3) / 2;
 	float heightSpace = (gameLayerSize.y - gameLayerSize.y * 4 * Config::cardSizeScale - gameLayerSize.y * Config::GameLayerCardSpacingScale * 3) / 2;
     
-	//²Ëµ¥À¸
+	//èœå•æ 
 	auto menuButton = Scale9Sprite::create(Resource::button_menu, Rect(0, 0, 150, 150), Rect(5, 5, 140, 140));
 	menuButton->setContentSize(Size(visibleSize.width * Config::menuButtonWidthScale, visibleSize.height * Config::menuButtonHeightScale));
 	auto menuButtonClicked = Scale9Sprite::create(Resource::button_menu_clicked, Rect(0, 0, 150, 150), Rect(5, 5, 140, 140));
@@ -159,7 +159,7 @@ void MainScene::setCard(int pos, const Size & visibleSize, const Vec2 & origin) 
     int i = pos / 4, j = pos % 4;
     if (activeCardArr[i][j] == NULL) {
         int num = CCRANDOM_0_1() * 3 + 1;
-        // ´¦ÀíÃªµãÆ«²î
+        // å¤„ç†é”šç‚¹åå·®
         auto card = CardSprite::createCardSprite(num, Vec2(0, 0), gameLayerSize * Config::cardSizeScale);
         card->setPosition(staticCardArr[i][j]->getPosition());
         activeCardArr[i][j] = card;
@@ -177,7 +177,7 @@ void MainScene::setCard(int pos, const Size & visibleSize, const Vec2 & origin) 
         j = pos % 4;
     }
 	int num = CCRANDOM_0_1() * 3 + 1;
-	// ´¦ÀíÃªµãÆ«²î
+	// å¤„ç†é”šç‚¹åå·®
 	auto card = CardSprite::createCardSprite(num, Vec2(0, 0), gameLayerSize * Config::cardSizeScale);
     card->setPosition(staticCardArr[i][j]->getPosition());
 	activeCardArr[i][j] = card;
@@ -597,14 +597,14 @@ void MainScene::updateCardArr() {
 	downcardarr.clear();
 	check();
 	
-	//Èç¹ûËÄ¸ö·½ÏòÊı×é¶¼Îª¿Õ,Ôògameove
+	//å¦‚æœå››ä¸ªæ–¹å‘æ•°ç»„éƒ½ä¸ºç©º,åˆ™gameove
 	if (rightcardarr.empty() && leftcardarr.empty() && upcardarr.empty() && downcardarr.empty()){
 		log("game is over");
         gameOver();
         return;
 	}
 
-	//ĞÂÔö¿¨Æ¬
+	//æ–°å¢å¡ç‰‡
 	for (int i = 0; i < 4; i++){
 		for (int j = 0; j < 4; j++){
 			if (activeCardArr[i][j] != NULL){
@@ -674,7 +674,7 @@ void MainScene::updateCardArr() {
 }
 
 void MainScene::check() {
-    // ÅĞ¶ÏÊÇ·ñ¿ÉÒÔºÏ²¢
+    // åˆ¤æ–­æ˜¯å¦å¯ä»¥åˆå¹¶
     auto checkNum = [](int i, int j) {
         if (i >= 3 && j >= 3 && i == j) {
             return true;
@@ -684,7 +684,7 @@ void MainScene::check() {
         }
         return false;
     };
-    // Éî¶È¸´ÖÆ
+    // æ·±åº¦å¤åˆ¶
     auto deepCopyMatrix = [](int a[4][4], int b[4][4]) {
         int i, j;
         for (i = 0; i < 4; i++) {
@@ -707,7 +707,7 @@ void MainScene::check() {
         }
     }
 
-    // ¼ì²â×óÒÆ¶ÓÁĞ
+    // æ£€æµ‹å·¦ç§»é˜Ÿåˆ—
     int tempMatrix[4][4];
     deepCopyMatrix(spriteMatrix, tempMatrix);
     for (i = 1; i < 4; i++) {
@@ -727,7 +727,7 @@ void MainScene::check() {
         }
     }
 
-    // ¼ì²âÓÒÒÆ¶ÓÁĞ
+    // æ£€æµ‹å³ç§»é˜Ÿåˆ—
     deepCopyMatrix(spriteMatrix, tempMatrix);
     for (i = 2; i >= 0; i--) {
         for (j = 0; j < 4; j++) {
@@ -746,7 +746,7 @@ void MainScene::check() {
         }
     }
 
-    // ¼ì²âÉÏÒÆ¶ÓÁĞ
+    // æ£€æµ‹ä¸Šç§»é˜Ÿåˆ—
     deepCopyMatrix(spriteMatrix, tempMatrix);
     for (j = 2; j >= 0; j--) {
         for (i = 0; i < 4; i++) {
@@ -765,7 +765,7 @@ void MainScene::check() {
         }
     }
 
-    // ¼ì²âÏÂÒÆ¶ÓÁĞ
+    // æ£€æµ‹ä¸‹ç§»é˜Ÿåˆ—
     deepCopyMatrix(spriteMatrix, tempMatrix);
     for (j = 1; j < 4; j++) {
         for (i = 0; i < 4; i++) {

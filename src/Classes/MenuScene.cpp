@@ -22,7 +22,7 @@ bool MenuScene::init()
 		return false;
 	}
 
-	//获取可使区域尺寸大小
+	//鑾峰彇鍙娇鍖哄煙灏哄澶у皬
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 

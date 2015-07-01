@@ -3,7 +3,7 @@
 USING_NS_CC;
 USING_NS_CC_EXT;
 
-// modeÎªÄ£Ê½£¬¾ö¶¨ÊÇ·ñÏÔÊ¾Êı×Ö£¬1ÎªÆÕÍ¨¿¨Æ¬£¬0ÎªÔ¤ÀÀÓÃµÄÍ¼Æ¬
+// modeä¸ºæ¨¡å¼ï¼Œå†³å®šæ˜¯å¦æ˜¾ç¤ºæ•°å­—ï¼Œ1ä¸ºæ™®é€šå¡ç‰‡ï¼Œ0ä¸ºé¢„è§ˆç”¨çš„å›¾ç‰‡
 CardSprite * CardSprite::createCardSprite(int num, Vec2 position, Vec2 size, int mode) {
     CardSprite * card = new CardSprite();
     if (card && card->init()) {
@@ -22,7 +22,7 @@ bool CardSprite::init() {
     return true;
 }
 
-// ³õÊ¼»¯¿¨Æ¬
+// åˆå§‹åŒ–å¡ç‰‡
 void CardSprite::initCard(int num, Vec2 position, Vec2 size, int mode) {
     // Color3B bgLayerColor;
 	string bgPic = "";
@@ -67,7 +67,7 @@ void CardSprite::initCard(int num, Vec2 position, Vec2 size, int mode) {
 	this->addChild(bgSprite, 1, "bgLayer");
 
 	auto visibleSize = Director::getInstance()->getVisibleSize();
-    // ´´½¨¿¨Æ¬
+    // åˆ›å»ºå¡ç‰‡
     if (num > 0) {
         //if (mode) {
         auto labelCardNumber = Label::createWithTTF((string)(__String::createWithFormat("%i", num)->getCString()), Config::fontStyle, visibleSize.height * Config::cardFontSizeScale);
@@ -86,7 +86,7 @@ void CardSprite::initCard(int num, Vec2 position, Vec2 size, int mode) {
         this->num = num;
         return;
     }
-    // ´´½¨¿¨Æ¬µ××ù
+    // åˆ›å»ºå¡ç‰‡åº•åº§
     this->num = 0;
     return;
 }

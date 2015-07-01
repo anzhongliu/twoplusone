@@ -27,19 +27,53 @@ THE SOFTWARE.
 package org.cocos2dx.cpp;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
 import com.vincent.android.LoginModuleApi;
 import org.cocos2dx.lib.Cocos2dxActivity;
 
 public class AppActivity extends Cocos2dxActivity {
-    private static int flag = 1;
+    private static int flag = 0;
+    private static String token;
+
+    private static AppActivity _this;
     public void onCreate(Bundle saveIntanceState) {
         super.onCreate(saveIntanceState);
+        _this = this;
     }
 
-    public void login() {
+    public static void login() {
         LoginModuleApi loginModuleApi = LoginModuleApi.getInstance();
         loginModuleApi.setLoginClass(AppActivity.class);
-        loginModuleApi.login(this);
+        loginModuleApi.setLoginRequestCode(1);
+        loginModuleApi.login(_this);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (RESULT_OK != resultCode){
+            Toast.makeText(this, "内部错误", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        int flag = data.getIntExtra("flag", LoginModuleApi.FLAG_ERROR);
+        if (flag == LoginModuleApi.FLAG_ERROR) {
+            Toast.makeText(this, "内部错误", Toast.LENGTH_LONG).show();
+            return ;
+        }
+
+        switch(requestCode) {
+            case 1: {
+                this.token = data.getStringExtra("token");
+                if (token == "" || token == null) {
+                    Toast.makeText(this, "登陆错误", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                Toast.makeText(this, "登陆成功", Toast.LENGTH_LONG).show();
+                break;
+            }
+        }
     }
 }

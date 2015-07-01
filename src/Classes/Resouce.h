@@ -9,7 +9,7 @@ USING_NS_CC;
 USING_NS_CC_EXT;
 
 namespace Resource {
-	// ͼƬ��Դ
+	// 图片资源
 	// button
 	// const static auto button_start = Scale9Sprite::create("button/button-start.png", Rect(0, 0, 150, 150), Rect(5, 5, 140, 140));
 	const static string button_start = "button/button-start.png";

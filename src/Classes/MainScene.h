@@ -28,27 +28,27 @@ private:
     CardSprite * staticCardArr[4][4];
     CardSprite * activeCardArr[4][4];
 
-    // ÓÎÏ·½áÊø
+    // æ¸¸æˆç»“æŸ
     void gameOver();
 
     virtual void onEnter();
 
-    // ´¥ÃşÊÂ¼ş
+    // è§¦æ‘¸äº‹ä»¶
     virtual bool onTouchBegan(cocos2d::Touch * touch, cocos2d::Event * event);
     virtual void onTouchMoved(cocos2d::Touch * touch, cocos2d::Event *);
     virtual void onTouchEnded(cocos2d::Touch * touch, cocos2d::Event *);
     virtual void onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event);
-    // ¼ÆËã·ÖÊı
+    // è®¡ç®—åˆ†æ•°
     int countScore();
 
-    // ¸üĞÂ¸÷·½ÏòÉÏµÄ¿¨Æ¬Êı×é
+    // æ›´æ–°å„æ–¹å‘ä¸Šçš„å¡ç‰‡æ•°ç»„
     void updateCardArr();
     void check();
 
-	//¿¨Æ¬Ïà¼ÓµÄ²Ù×÷
+	//å¡ç‰‡ç›¸åŠ çš„æ“ä½œ
 	CardSprite* operationPlus(int, int, int);
 
-	//²Ëµ¥À¸µã»÷µÄcallback function
+	//èœå•æ ç‚¹å‡»çš„callback function
 	void menuClickCallback(cocos2d::Ref* pSender);
 
     // 
@@ -57,19 +57,19 @@ private:
         int j;
     };
 
-    // Î¬»¤¸÷·½ÏòÉÏµÄÊı×é
+    // ç»´æŠ¤å„æ–¹å‘ä¸Šçš„æ•°ç»„
     std::vector<cardspriteindex> upcardarr;
     std::vector<cardspriteindex> downcardarr;
     std::vector<cardspriteindex> rightcardarr;
     std::vector<cardspriteindex> leftcardarr;
 
-	//gameLayer´óĞ¡
+	//gameLayerå¤§å°
 	Vec2 gameLayerSize;
 
-    // ÅĞ¶ÏÊÇ·ñ¿ÉÒÔ»¬¶¯µÄ±êÊ¶
+    // åˆ¤æ–­æ˜¯å¦å¯ä»¥æ»‘åŠ¨çš„æ ‡è¯†
     bool isScrollable;
 
-	//±êÖ¾ÖØ¸´µÄµÈ¼¶
+	//æ ‡å¿—é‡å¤çš„ç­‰çº§
 	int duplicateLevel[2];
 	
 	// 
