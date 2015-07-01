@@ -26,14 +26,11 @@ THE SOFTWARE.
 ****************************************************************************/
 package org.cocos2dx.cpp;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 import com.vincent.android.LoginModuleApi;
 import org.cocos2dx.lib.Cocos2dxActivity;
-import org.cocos2dx.test.R;
 
 public class AppActivity extends Cocos2dxActivity {
     private static int flag = 0;
@@ -43,7 +40,7 @@ public class AppActivity extends Cocos2dxActivity {
     public void onCreate(Bundle saveIntanceState) {
         super.onCreate(saveIntanceState);
         _this = this;
-        LoginModuleApi.getInstance().setLoginActivityUI(R.layout.login_layout);
+//        LoginModuleApi.getInstance().setLoginActivityUI(R.layout.login_layout);
     }
 
     public static void login() {
