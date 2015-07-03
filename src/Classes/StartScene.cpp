@@ -90,20 +90,59 @@ bool StartScene::init()
 
     // 用于测试登陆按钮
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-    auto pLoginButton = Scale9Sprite::create(Resource::button_exit, Rect(0, 0, 150, 150), Rect(5, 5, 140, 140));
-    	pLoginButton->setContentSize(Size(visibleSize.width * Config::buttonWidthScale, visibleSize.height * Config::buttonHeightScale));
-    	auto pLoginButtonClicked = Scale9Sprite::create(Resource::button_exit_clicked, Rect(0, 0, 150, 150), Rect(5, 5, 140, 140));
-    	pLoginButtonClicked->setContentSize(Size(visibleSize.width * Config::buttonWidthScale, visibleSize.height * Config::buttonHeightScale));
-    	auto pLoginItem = MenuItemSprite::create(pLoginButton,
-    		pLoginButtonClicked,
-    		NULL,
-            this,
-            menu_selector(StartScene::menuLoginCallback));
-        auto loginItemLabel = Label::createWithTTF("LOGIN", Config::fontStyle, visibleSize.height * Config::menuFontSizeScale);
-    	pLoginItem->addChild(loginItemLabel);
-    	loginItemLabel->setColor(Config::menuLabelColor);
-    	loginItemLabel->setPosition(pLoginItem->getContentSize() / 2);
-        pMenuItems.pushBack(pLoginItem);
+	JniMethodInfo minfo;
+	int flag = 0;
+    bool isHave = JniHelper::getStaticMethodInfo(minfo,"org/cocos2dx/cpp/AppActivity","getLogin_flag", "()I");
+       if (!isHave) {
+            log("jni:login is null");
+        }else{
+            //调用此函数
+            flag = minfo.env->CallStaticIntMethod(minfo.classID, minfo.methodID);
+     }
+        auto pEditButton = Scale9Sprite::create(Resource::button_exit, Rect(0, 0, 150, 150), Rect(5, 5, 140, 140));
+                      	pEditButton->setContentSize(Size(visibleSize.width * Config::buttonWidthScale, visibleSize.height * Config::buttonHeightScale));
+                      	auto pEditButtonClicked = Scale9Sprite::create(Resource::button_exit_clicked, Rect(0, 0, 150, 150), Rect(5, 5, 140, 140));
+                      	pEditButtonClicked->setContentSize(Size(visibleSize.width * Config::buttonWidthScale, visibleSize.height * Config::buttonHeightScale));
+                      	auto pEditItem = MenuItemSprite::create(pEditButton,
+                      		pEditButtonClicked,
+                      		NULL,
+                              this,
+                              menu_selector(StartScene::menuEditCallback));
+                          auto editItemLabel = Label::createWithTTF("EDIT", Config::fontStyle, visibleSize.height * Config::menuFontSizeScale);
+                      	pEditItem->addChild(editItemLabel);
+                      	editItemLabel->setColor(Config::menuLabelColor);
+                      	editItemLabel->setPosition(pEditItem->getContentSize() / 2);
+
+              auto pLogoutButton = Scale9Sprite::create(Resource::button_exit, Rect(0, 0, 150, 150), Rect(5, 5, 140, 140));
+                       	pLogoutButton->setContentSize(Size(visibleSize.width * Config::buttonWidthScale, visibleSize.height * Config::buttonHeightScale));
+                       	auto pLogoutButtonClicked = Scale9Sprite::create(Resource::button_exit_clicked, Rect(0, 0, 150, 150), Rect(5, 5, 140, 140));
+                       	pLogoutButtonClicked->setContentSize(Size(visibleSize.width * Config::buttonWidthScale, visibleSize.height * Config::buttonHeightScale));
+                       	auto pLogoutItem = MenuItemSprite::create(pLogoutButton,
+                       		pLogoutButtonClicked,
+                       		NULL,
+                               this,
+                               menu_selector(StartScene::menuLogoutCallback));
+                           auto logoutItemLabel = Label::createWithTTF("LOGOUT", Config::fontStyle, visibleSize.height * Config::menuFontSizeScale);
+                       	pLogoutItem->addChild(logoutItemLabel);
+                       	logoutItemLabel->setColor(Config::menuLabelColor);
+                       	logoutItemLabel->setPosition(pLogoutItem->getContentSize() / 2);
+
+
+      auto pLoginButton = Scale9Sprite::create(Resource::button_exit, Rect(0, 0, 150, 150), Rect(5, 5, 140, 140));
+              	pLoginButton->setContentSize(Size(visibleSize.width * Config::buttonWidthScale, visibleSize.height * Config::buttonHeightScale));
+              	auto pLoginButtonClicked = Scale9Sprite::create(Resource::button_exit_clicked, Rect(0, 0, 150, 150), Rect(5, 5, 140, 140));
+              	pLoginButtonClicked->setContentSize(Size(visibleSize.width * Config::buttonWidthScale, visibleSize.height * Config::buttonHeightScale));
+              	auto pLoginItem = MenuItemSprite::create(pLoginButton,
+              		pLoginButtonClicked,
+              		NULL,
+                      this,
+                      menu_selector(StartScene::menuLoginCallback));
+                  auto loginItemLabel = Label::createWithTTF("LOGIN_AGAIN", Config::fontStyle, visibleSize.height * Config::menuFontSizeScale);
+              	pLoginItem->addChild(loginItemLabel);
+              	loginItemLabel->setColor(Config::menuLabelColor);
+              	loginItemLabel->setPosition(pLoginItem->getContentSize() / 2);
+              	pMenuItems.pushBack(pLoginItem);
+
  #endif
 
 #if (TEST_OVER_SCENE == 1) 
@@ -129,7 +168,14 @@ bool StartScene::init()
 	bgLayer->addChild(pMenu, 1);
 	// scheduleUpdate();
 
- 
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+    if(flag == 1){
+         pMenu->removeChild(pLoginItem,true);
+         pMenu->addChild(pLogoutItem);
+         pMenu->addChild(pEditItem);
+    }
+
+#endif
 
 	return true;
 }
@@ -203,6 +249,36 @@ void StartScene::menuLoginCallback(Ref * pSender){
     JniMethodInfo minfo;
 
     bool isHave = JniHelper::getStaticMethodInfo(minfo,"org/cocos2dx/cpp/AppActivity","login", "()V");
+
+    if (!isHave) {
+        log("jni:login is null");
+    }else{
+        //调用此函数
+        minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID);
+    }
+#endif
+}
+
+void StartScene::menuEditCallback(Ref * pSender){
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID) //判断当前是否为Android平台
+    JniMethodInfo minfo;
+
+    bool isHave = JniHelper::getStaticMethodInfo(minfo,"org/cocos2dx/cpp/AppActivity","edit", "()V");
+
+    if (!isHave) {
+        log("jni:login is null");
+    }else{
+        //调用此函数
+        minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID);
+    }
+#endif
+}
+
+void StartScene::menuLogoutCallback(Ref * pSender){
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID) //判断当前是否为Android平台
+    JniMethodInfo minfo;
+
+    bool isHave = JniHelper::getStaticMethodInfo(minfo,"org/cocos2dx/cpp/AppActivity","logout", "()V");
 
     if (!isHave) {
         log("jni:login is null");

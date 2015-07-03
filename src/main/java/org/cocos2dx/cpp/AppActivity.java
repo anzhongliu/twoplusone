@@ -33,24 +33,52 @@ import com.vincent.android.LoginModuleApi;
 import org.cocos2dx.lib.Cocos2dxActivity;
 
 public class AppActivity extends Cocos2dxActivity {
-    private static int flag = 0;
+    //默认为0，当登录成功后为 1
+    private static int login_flag;
+    private  static  final  int LOGIN_REQUEST_CODE =1;
     private static String token;
 
     private static AppActivity _this;
     public void onCreate(Bundle saveIntanceState) {
-        super.onCreate(saveIntanceState);
+
         _this = this;
-//        LoginModuleApi.getInstance().setLoginActivityUI(R.layout.login_layout);
+        if (LoginModuleApi.getInstance().getToken() != null){
+            this.token = LoginModuleApi.getInstance().getToken();
+            login_flag = 1;
+        } else {
+            login_flag = 0;
+        }
+        super.onCreate(saveIntanceState);
     }
 
     public static void login() {
         LoginModuleApi loginModuleApi = LoginModuleApi.getInstance();
-        loginModuleApi.setLoginClass(AppActivity.class);
-        loginModuleApi.setLoginRequestCode(1);
+//        loginModuleApi.setLoginClass(AppActivity.class);
+        loginModuleApi.setLoginRequestCode(LOGIN_REQUEST_CODE);
         loginModuleApi.login(_this);
     }
 
-//    public static void regist() {
+    public static void edit() {
+        LoginModuleApi loginModuleApi = LoginModuleApi.getInstance();
+//        loginModuleApi.setLoginClass(AppActivity.class);
+        loginModuleApi.setLoginRequestCode(LOGIN_REQUEST_CODE);
+        loginModuleApi.edit(_this);
+    }
+
+    public static void logout() {
+        LoginModuleApi loginModuleApi = LoginModuleApi.getInstance();
+        loginModuleApi.setLogoutClass(AppActivity.class);
+        boolean  result = loginModuleApi.logout(_this);
+        if(!result){
+            Toast.makeText(_this, "内部错误", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public static int getLogin_flag() {
+        return login_flag;
+    }
+
+    //    public static void regist() {
 //        LoginModuleApi loginModuleApi = LoginModuleApi.getInstance();
 //        loginModuleApi.regist(_this);
 //    }
@@ -69,15 +97,17 @@ public class AppActivity extends Cocos2dxActivity {
         }
 
         switch(requestCode) {
-            case 1: {
+            case LOGIN_REQUEST_CODE: {
                 this.token = data.getStringExtra("token");
                 if (token == "" || token == null) {
                     Toast.makeText(this, "登陆错误", Toast.LENGTH_LONG).show();
                     return;
                 }
                 Toast.makeText(this, "登陆成功", Toast.LENGTH_LONG).show();
+                login_flag = 1;
                 break;
             }
         }
     }
+
 }

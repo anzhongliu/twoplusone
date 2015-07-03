@@ -34,6 +34,8 @@ public:
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
     void menuLoginCallback(cocos2d::Ref * pSender);
+    void menuEditCallback(cocos2d::Ref * pSender);
+    void menuLogoutCallback(cocos2d::Ref * pSender);
 #endif
 #if (TEST_OVER_SCENE == 1)
     void overSceneCallback(cocos2d::Ref * pSender);
