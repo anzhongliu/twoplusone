@@ -86,7 +86,7 @@ public class AppActivity extends Cocos2dxActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (RESULT_OK != resultCode){
-            Toast.makeText(this, "内部错误", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "请求失效", Toast.LENGTH_LONG).show();
             return;
         }
 
